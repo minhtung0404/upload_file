@@ -1,0 +1,23 @@
+{
+  "name": "upload_file",
+  "version": "1.0.0",
+  "description": "upload/download file server",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minhtung0404/upload_file.git"
+  },
+  "author": "minhtung0404",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minhtung0404/upload_file/issues"
+  },
+  "homepage": "https://github.com/minhtung0404/upload_file#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "formidable": "^1.2.2"
+  }
+}
