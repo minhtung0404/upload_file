@@ -8,23 +8,24 @@ app.use('/', express.static('/'));
 
 let Data, Upload, Download;
 
-fs.readFile('index.html', 'utf8', (err, data) => {
+fs.readFile('./html/index.html', 'utf8', (err, data) => {
     if (err) throw err;
     Data = data;
 });
 
-fs.readFile('download.html', 'utf8', (err, data) => {
+fs.readFile('./html/download.html', 'utf8', (err, data) => {
     if (err) throw err;
     Download = data;
 });
 
-fs.readFile('upload.html', 'utf8', (err, data) => {
+fs.readFile('./html/upload.html', 'utf8', (err, data) => {
     if (err) throw err;
     Upload = data;
 });
 
 app.get('/', function(req, res){
     res.write(Data);
+    res.end();
 });
 
 app.get('/download', function(req, res){
@@ -44,6 +45,7 @@ app.get('/download', function(req, res){
             html = Download.replace("[file]", html);
             res.write(html);
         }
+        res.end();
     });
 });
 
@@ -51,11 +53,13 @@ app.get('/files/:filename', function(req, res){
     res.download('./files/' + req.params.filename, (err) => {
         if (err) throw err;
         console.log("Download " + req.params.filename + " completed!");
+        res.end();
     });
 });
 
 app.get('/upload', function(req, res){
     res.write(Upload);
+    res.end();
 });
 
 app.post('/upload', function(req, res){
@@ -65,10 +69,7 @@ app.post('/upload', function(req, res){
         var newpath = './files/' + files.upload.name;
         fs.rename(oldpath, newpath, function (err) {
             if (err) throw err;
-            res.write('<html>');
-            res.write('<br><a> File was uploaded</a>')
-            res.write('<br><a href="/"> Click here to go back </a>');
-            res.write('</html>');
+            res.redirect('/');
         });
         console.log('File ' + files.upload.name + ' is uploaded');
     });
