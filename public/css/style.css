@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.link{
+    font-size : 30px;
+    text-decoration: non;
+}
+.form-size{
+    border: none;
+    width: 20em;
+    height: 2em;
+}
